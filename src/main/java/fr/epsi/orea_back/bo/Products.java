@@ -20,7 +20,10 @@ public class Products implements Serializable {
 
     @Column(name = "ALLERGENS")
     private String allergens;
-    @OneToMany(mappedBy = "product")
-    private Set<PicturesProducts> picturesProducts;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name="products_assets", joinColumns= @JoinColumn(name="ID_PRO", referencedColumnName= "ID"),
+            inverseJoinColumns= @JoinColumn(name="ID_ASS", referencedColumnName="ID")
+    )
+    private Set<Assets> assets;
 
 }
